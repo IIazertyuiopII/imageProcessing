@@ -116,7 +116,7 @@ public class PGMImage {
        ArrayList<Integer> freqArrays = new ArrayList<>();
        int maxFreq = 0;
        
-       for(int i=0; i<l*h; i++){
+       for(int i=0; i<256; i++){
            freqArrays.add(0);
        } 
        
@@ -137,7 +137,7 @@ public class PGMImage {
        }
        
        
-       for(int i=0; i<=256; i++){
+       for(int i=0; i<256; i++){
            for(int j=0; j<maxFreq; j++){
              
                
@@ -173,10 +173,9 @@ public class PGMImage {
         for(int i=0;i<deltaH;i++){
             delIndicesArray.add(Math.round((float) i*oldHauteur/deltaH));
         }    
-        System.out.println(deltaH);
         
         for(int i=0;i<oldHauteur*oldLargeur;i++){
-           if(!delIndicesArray.contains(i%oldLargeur)){
+           if(!delIndicesArray.contains((int)i/oldLargeur)){
                newArray.add(oldArray.get(i));
            } 
         setH(hauteur);
@@ -191,7 +190,7 @@ public class PGMImage {
             
             
         }
-        System.out.println(newArray.size());
+        //System.out.println(newArray.size());
         setPixelArray(newArray);
     }
     
@@ -214,7 +213,7 @@ public class PGMImage {
         }    
         
         for(int i=0;i<oldHauteur*oldLargeur;i++){
-           if(!delIndicesArray.contains((int)i/oldLargeur)){
+           if(!delIndicesArray.contains(i%oldLargeur)){
                newArray.add(oldArray.get(i));
            } 
         setL(largeur);
@@ -229,7 +228,7 @@ public class PGMImage {
             
             
         }
-        System.out.println(newArray.size());
+        //System.out.println(newArray.size());
         setPixelArray(newArray);
 
     }       

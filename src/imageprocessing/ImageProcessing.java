@@ -22,26 +22,26 @@ public class ImageProcessing {
         // TODO code application logic here
         //Test des readers and writers
         
-      PGMImage I = new PGMImage(3,5);
+        //PGMImage I = new PGMImage(3,5);
         
         PGMImage Lena = new PGMImage(512,512);
-        Lena.fillImage();
+        //Lena.fillImage();
+        //Writer.writeToFile(Lena,"image");
 
-    /*    try {
+        try {
             Lena = Reader.readFromFile("lena.pgm");
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ImageProcessing.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(ImageProcessing.class.getName()).log(Level.SEVERE, null, ex);
         }
-      */  
-        
+      
+      Writer.writeToFile(Lena.generateHistogram(),"lenahist");
       //I.fillImage();
       //I.resize(2, 4);
-      Lena.resize(11, 11);
-      System.out.println(Lena.getPixelArray().size());
-      //Writer.writeToFile(Lena.generateHistogram(),"lenahist");
-      //Writer.writeToFile(Lena,"lenamodif");
+      Lena.resize(200, 200);
+      //System.out.println(Lena.getPixelArray().size());
+      Writer.writeToFile(Lena,"lenamodif");
      
     }
 }
