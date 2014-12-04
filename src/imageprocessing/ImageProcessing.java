@@ -28,17 +28,21 @@ public class ImageProcessing {
         //Lena.fillImage();
         //Writer.writeToFile(Lena,"image");
 
-        try {
+       try {
             Lena = Reader.readFromFile("lena.pgm");
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ImageProcessing.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(ImageProcessing.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Lena.seuil(100);
-      Writer.writeToFile(Lena,"lenaSeuil.pgm");
-
-
+      
+      Writer.writeToFile(Lena.generateHistogram(),"lenahist");
+      //I.fillImage();
+      //I.resize(2, 4);
+      //Lena.resize(200, 200);
+      //Writer.writeToFile(Lena,"lenared");
+      Lena.resize(600, 600);
+      Writer.writeToFile(Lena,"lenaagr");
      
     }
 }
