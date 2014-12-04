@@ -59,6 +59,9 @@ public class Reader {
             return image;
         
     }
+    
+    
+    //public static 
 }
 
     

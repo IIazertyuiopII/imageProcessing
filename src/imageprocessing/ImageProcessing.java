@@ -35,13 +35,10 @@ public class ImageProcessing {
         } catch (IOException ex) {
             Logger.getLogger(ImageProcessing.class.getName()).log(Level.SEVERE, null, ex);
         }
-      
-      Writer.writeToFile(Lena.generateHistogram(),"lenahist");
-      //I.fillImage();
-      //I.resize(2, 4);
-      Lena.resize(200, 200);
-      //System.out.println(Lena.getPixelArray().size());
-      Writer.writeToFile(Lena,"lenamodif");
+        Lena.seuil(100);
+      Writer.writeToFile(Lena,"lenaSeuil.pgm");
+
+
      
     }
 }
