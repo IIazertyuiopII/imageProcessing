@@ -24,21 +24,24 @@ public class ImageProcessing {
         
       PGMImage I = new PGMImage(3,5);
         
-        PGMImage Lena = null;
-        try {
+        PGMImage Lena = new PGMImage(512,512);
+        Lena.fillImage();
+
+    /*    try {
             Lena = Reader.readFromFile("lena.pgm");
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ImageProcessing.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(ImageProcessing.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+      */  
         
       //I.fillImage();
       //I.resize(2, 4);
-      Lena.resize(50, 50);
-      Writer.writeToFile(Lena.generateHistogram(),"lenahist");
-      Writer.writeToFile(Lena,"lenamodif");
+      Lena.resize(11, 11);
+      System.out.println(Lena.getPixelArray().size());
+      //Writer.writeToFile(Lena.generateHistogram(),"lenahist");
+      //Writer.writeToFile(Lena,"lenamodif");
      
     }
 }
