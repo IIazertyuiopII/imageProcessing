@@ -36,7 +36,7 @@ public class ImageProcessing {
         
       //I.fillImage();
       //I.resize(2, 4);
-      Lena.resize(511, 511);
+      Lena.resize(50, 50);
       Writer.writeToFile(Lena.generateHistogram(),"lenahist");
       Writer.writeToFile(Lena,"lenamodif");
      
