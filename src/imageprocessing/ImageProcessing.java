@@ -22,11 +22,11 @@ public class ImageProcessing {
         // TODO code application logic here
         //Test des readers and writers
         
-      PGMImage I = new PGMImage(15,15);
+      PGMImage I = new PGMImage(3,5);
         
-        /* PGMImage image = null;
+        PGMImage Lena = null;
         try {
-            image = Reader.readFromFile("lena.pgm");
+            Lena = Reader.readFromFile("lena.pgm");
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ImageProcessing.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -34,8 +34,11 @@ public class ImageProcessing {
         }
         
         
-        //image.fillImage();*/
-        Writer.writeToFile(I);
+      //I.fillImage();
+      //I.resize(2, 4);
+      Lena.resize(511, 511);
+      Writer.writeToFile(Lena.generateHistogram(),"lenahist");
+      Writer.writeToFile(Lena,"lenamodif");
      
     }
 }

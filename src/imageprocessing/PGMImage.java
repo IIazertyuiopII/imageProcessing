@@ -119,19 +119,28 @@ public class PGMImage {
     
     public PGMImage generateHistogram() {
         
-       
        ArrayList<Integer> freqArrays = new ArrayList<>();
        int maxFreq = 0;
        
        for(int i=0; i<pixelArray.size(); i++){
-           freqArrays.set(pixelArray.get(i),freqArrays.get(pixelArray.get(i)+1));
+           freqArrays.add(0);
+       } 
+       
+       for(int i=0; i<pixelArray.size(); i++){           
+           freqArrays.set(pixelArray.get(i),1+freqArrays.get(pixelArray.get(i)));
+           
            if(freqArrays.get(pixelArray.get(i))>maxFreq){
                maxFreq=freqArrays.get(pixelArray.get(i));
            }
        } 
        
-       
+        System.out.println(maxFreq);
+        
        ArrayList<Integer> histPixelArray = new ArrayList<>();
+       for(int i=0;i<256*maxFreq;i++){
+           histPixelArray.add(0);
+       }
+       
        
        for(int i=0; i<256; i++){
            for(int j=0; j<maxFreq; j++){
@@ -167,7 +176,7 @@ public class PGMImage {
         ArrayList<Integer> delIndicesArray = new ArrayList<>();    
             
         for(int i=0;i<deltaH;i++){
-            delIndicesArray.set(i,Math.round((float) i*h/deltaH));
+            delIndicesArray.add(Math.round((float) i*oldHauteur/deltaH));
         }    
         
         for(int i=0;i<oldHauteur*oldLargeur;i++){
@@ -192,7 +201,39 @@ public class PGMImage {
     
     public void resizeL(int largeur)
     {
-        int deltaL = l-largeur;
+       int oldHauteur = h;
+        int oldLargeur = l;
+        ArrayList<Integer> oldArray = (ArrayList<Integer>)pixelArray.clone();
+        
+        ArrayList<Integer> newArray = new ArrayList<>();
+        
+        int deltaL = oldLargeur-largeur;
+
+        if(deltaL==0){return;}
+        if(deltaL>0){ //réduction
+        ArrayList<Integer> delIndicesArray = new ArrayList<>();    
+            
+        for(int i=0;i<deltaL;i++){
+            delIndicesArray.add(Math.round((float) i*oldLargeur/deltaL));
+        }    
+        
+        for(int i=0;i<oldHauteur*oldLargeur;i++){
+           if(!delIndicesArray.contains((int)i/oldLargeur)){
+               
+               newArray.add(oldArray.get(i));
+           } 
+        setL(largeur);
+            
+        }
+            
+            
+        }
+        else{
+            
+            
+            
+            
+        }
     }       
             
     public void resize(int largeur, int hauteur){

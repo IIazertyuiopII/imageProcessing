@@ -16,16 +16,16 @@ import java.io.IOException;
 public class Writer {
 
     /**
-     *Crée unn fichier .pgm a partir d'un PGMImage
+     *Crée un fichier .pgm a partir d'un PGMImage
      * @param image
      */
-    public static void writeToFile(PGMImage image) {
+    public static void writeToFile(PGMImage image, String filename) {
         
         int compteur=0; //Permet de compter le nombre de caractères insérés.
 
         try {
 
-            BufferedWriter bw = new BufferedWriter(new FileWriter("image.pgm"));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(filename+".pgm"));
             bw.write("P2 \n#\n");
             bw.write(image.getL()+" "+image.getH()+"\n");
             bw.write(Integer.toString(PGMImage.greyScale)+"\n");
