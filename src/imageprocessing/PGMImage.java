@@ -232,7 +232,7 @@ public class PGMImage {
        
         for(int i=oldHauteur*oldLargeur-1;i>=0;i--){
            if(addIndicesArray.contains((int)i/oldLargeur)){
-               for(int k=0;k<l;k++){
+               for(int k=1;k<l;k++){
                newArray.add(i, getAveragePixelValuesH(i));
                i--;
                }
@@ -284,8 +284,7 @@ public class PGMImage {
 
             for(int i=oldHauteur*oldLargeur-1;i>=0;i--){
                if(addIndicesArray.contains(i%oldLargeur)){
-               System.out.println();
-               for(int k=0;k<l;k++){
+               for(int k=1;k<l;k++){
                newArray.add(i, getAveragePixelValuesL(i));
                i--;
                }           
