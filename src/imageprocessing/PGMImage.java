@@ -5,6 +5,7 @@
 package imageprocessing;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -236,6 +237,8 @@ public class PGMImage {
               i--;
               }
             i++;
+            //System.out.println(newPixelLine);
+            Collections.reverse(newPixelLine);
             newArray.addAll(i+(l), newPixelLine);
             newPixelLine.clear();
            } 
@@ -285,10 +288,12 @@ public class PGMImage {
                 addIndicesArray.add(Math.round((float) i*oldHauteur/deltaL));
             }    
             
+            //System.out.println(addIndicesArray);
             
             for(int i=oldHauteur*oldLargeur-1;i>=0;i--){
                if(addIndicesArray.contains(i%oldLargeur)){
-                   newArray.add(i, getAveragePixelValuesL(i));
+                   //System.out.println("indice : "+i);
+                   newArray.add(i+1, getAveragePixelValuesL(i));
                } 
 
             }  

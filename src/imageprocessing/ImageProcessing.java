@@ -36,11 +36,13 @@ public class ImageProcessing {
     
       //Writer.writeToFile(Lena.generateHistogram(),"lenahist");
         
-      Lena.resize(200, 200);
+      Lena.resize(200,200);
       Writer.writeToFile(Lena,"lenared");
-      Lena.resize(300,300);
+      Lena.resize(400,400);
       Writer.writeToFile(Lena,"lenaagr");
-      //Lena.seuil();
+
+      
+//Lena.seuil();
       //Writer.writeToFile(Lena,"seuild");
      
     }
