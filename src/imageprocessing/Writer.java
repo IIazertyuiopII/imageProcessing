@@ -29,7 +29,7 @@ public class Writer {
             bw.write("P2 \n#\n");
             bw.write(image.getL()+" "+image.getH()+"\n");
             bw.write(Integer.toString(PGMImage.greyScale)+"\n");
-         
+            
             for(int i=0;i<(image.getL()*image.getH());i++ ){
                 bw.write(Integer.toString(image.getPixelArray().get(i))+" ");
                 compteur+= 4;

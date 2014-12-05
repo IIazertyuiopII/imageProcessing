@@ -25,7 +25,7 @@ public class ImageProcessing {
         PGMImage Lena = new PGMImage(512,512);
         Lena.fillImage();
         //Writer.writeToFile(Lena,"image");
-/*
+
        try {
             Lena = Reader.readFromFile("lena.pgm");
         } catch (FileNotFoundException ex) {
@@ -33,12 +33,12 @@ public class ImageProcessing {
         } catch (IOException ex) {
             Logger.getLogger(ImageProcessing.class.getName()).log(Level.SEVERE, null, ex);
         }
-*/      
+    
       //Writer.writeToFile(Lena.generateHistogram(),"lenahist");
         
-      Lena.resize(3, 3);
+      Lena.resize(200, 200);
       Writer.writeToFile(Lena,"lenared");
-      Lena.resize(6, 6);
+      Lena.resize(300,300);
       Writer.writeToFile(Lena,"lenaagr");
       //Lena.seuil();
       //Writer.writeToFile(Lena,"seuild");
