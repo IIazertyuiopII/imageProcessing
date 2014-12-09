@@ -146,6 +146,17 @@ public class PGMImage {
     return this;
     }
     
+    public int count (Integer O, ArrayList<Integer> A){
+        int res = 0;
+        ArrayList<Integer> Acopy = (ArrayList <Integer>)A.clone();
+        while (Acopy.contains(O)){
+            res++;
+            Acopy.remove(O);
+        }
+        return res;
+    }
+    
+    
     public PGMImage generateHistogram() {
         
        ArrayList<Integer> freqArrays = new ArrayList<>();
@@ -210,6 +221,7 @@ public class PGMImage {
         }    
         
         
+        
         for(int i=0;i<oldHauteur*oldLargeur;i++){
            if(!delIndicesArray.contains((int)i/oldLargeur)){
                newArray.add(oldArray.get(i));
@@ -224,28 +236,30 @@ public class PGMImage {
          deltaH = -1*deltaH;   
          ArrayList<Integer> addIndicesArray = new ArrayList<>();    
         
+        int valueToAdd; 
         for(int i=0;i<deltaH;i++){
-            addIndicesArray.add(Math.round((float) i*oldHauteur/deltaH));
+            valueToAdd = Math.round((float) i*oldHauteur/deltaH) < oldHauteur ? Math.round((float) i*oldHauteur/deltaH) : oldHauteur-1;
+            addIndicesArray.add(valueToAdd);
         }    
                 
         ArrayList<Integer> newPixelLine = new ArrayList<>();
-        
         for(int i=oldHauteur*oldLargeur-1;i>=0;i--){
-           if(addIndicesArray.contains((int)i/oldLargeur)){
-              for(int k=0;k<l;k++){
-              newPixelLine.add(getAveragePixelValuesH(i));
-              i--;
-              }
-            i++;
-            //System.out.println(newPixelLine);
-            Collections.reverse(newPixelLine);
-            newArray.addAll(i+(l), newPixelLine);
-            newPixelLine.clear();
-           } 
-            
-        }   
+            int currentLineInd = (int)i/oldLargeur; 
+            if(addIndicesArray.contains(currentLineInd)){ 
+                for(int k=0;k<l;k++){
+                    newPixelLine.add(getAveragePixelValuesH(i));
+                    i--;
+                }
+                i++;
+                //System.out.println(newPixelLine);
+                Collections.reverse(newPixelLine);
+                for(int n=0;n<count(currentLineInd, addIndicesArray);n++){
+                    newArray.addAll(i+(l), newPixelLine);
+                }
+                newPixelLine.clear();
+           }
+        }        
         }
-        
         
         //System.out.println(newArray.size());
         setH(hauteur);
@@ -284,16 +298,21 @@ public class PGMImage {
              deltaL = -1*deltaL;   
              ArrayList<Integer> addIndicesArray = new ArrayList<>();    
 
+            int valueToAdd; 
             for(int i=0;i<deltaL;i++){
-                addIndicesArray.add(Math.round((float) i*oldHauteur/deltaL));
-            }    
+                valueToAdd = Math.round((float) i*oldHauteur/deltaL) < oldLargeur ? Math.round((float) i*oldHauteur/deltaL) : oldLargeur-1;
+                addIndicesArray.add(valueToAdd);
+            }  
             
             //System.out.println(addIndicesArray);
             
             for(int i=oldHauteur*oldLargeur-1;i>=0;i--){
-               if(addIndicesArray.contains(i%oldLargeur)){
+                int currentColInd = i%oldLargeur;
+                if(addIndicesArray.contains(currentColInd)){
                    //System.out.println("indice : "+i);
-                   newArray.add(i+1, getAveragePixelValuesL(i));
+                   for(int n=0;n<count(currentColInd, addIndicesArray);n++){
+                      newArray.add(i+1, getAveragePixelValuesL(i));
+                   }
                } 
 
             }  
@@ -308,7 +327,7 @@ public class PGMImage {
     
         resizeL(largeur);
         resizeH(hauteur);
-                
+
     }
 
     /**

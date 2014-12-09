@@ -38,7 +38,7 @@ public class ImageProcessing {
         
       Lena.resize(200,200);
       Writer.writeToFile(Lena,"lenared");
-      Lena.resize(400,400);
+      Lena.resize(1000,1000);
       Writer.writeToFile(Lena,"lenaagr");
 
       
