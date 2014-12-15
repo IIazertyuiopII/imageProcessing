@@ -34,7 +34,7 @@ public class ImageProcessing {
             Logger.getLogger(ImageProcessing.class.getName()).log(Level.SEVERE, null, ex);
         }
     
-      //Writer.writeToFile(Lena.generateHistogram(),"lenahist");
+      Writer.writeToFile(Lena.generateHistogram(),"lenahist");
         
       Lena.resize(200,200);
       Writer.writeToFile(Lena,"lenared");
