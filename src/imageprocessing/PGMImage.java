@@ -104,6 +104,55 @@ public class PGMImage {
         
     }
     
+    public void Julia(double Pr, double Pi) {
+     
+        double x;
+        double y;
+        double tmp;
+        int couleur;
+        
+        for(int i=0; i<pixelArray.size(); i++){
+            x = -2+4*(double)(1+i%l)/l;
+            y = -2+4*(double)(1+(int)i/l)/h;
+            couleur=0;
+            do{
+                tmp=Pr+x*x-y*y;
+                y=Pi+2*x*y;
+                x=tmp;
+                couleur++;
+            }while(Math.sqrt(x*x+y*y)<=2 && couleur<greyScale);
+            pixelArray.set(i,couleur);
+        }
+        
+    }
+    
+    public void Mandelbrot(int x0, int x1, int y0, int y1) {
+     
+        int x;
+        int y;
+        int couleur;
+        double Zr;
+        double Zi;
+        double tmp;
+        
+        for(int i=0; i<pixelArray.size(); i++){
+            x = -x0+2*x1*(1+i%l)/l;
+            y = -y0+2*y1*(1+(int)i/l)/h;
+            couleur=0;
+            Zr = 0;
+            Zi = 0;
+            do{
+                tmp=x+Zr*Zr-Zi*Zi;
+                Zi=y+2*Zr*Zi;
+                Zr=tmp;
+                couleur++;
+            }while(Math.sqrt(x*x+y*y)<=2 && couleur<16);
+            if(couleur==16)pixelArray.set(i,greyScale);
+            else pixelArray.set(i,0);
+        }
+        
+    }
+    
     public PGMImage diff(PGMImage I){
     
     int diffVal = 0;

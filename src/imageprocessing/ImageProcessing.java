@@ -22,10 +22,12 @@ public class ImageProcessing {
         // TODO code application logic here
         //Test des readers and writers
                 
-        PGMImage Lena = new PGMImage(512,512);
-        Lena.fillImage();
-        //Writer.writeToFile(Lena,"image");
-
+        PGMImage Lena = new PGMImage(4000,4000);
+        Lena.Mandelbrot(-1,1,-1,1);
+        Writer.writeToFile(Lena,"image");
+        Lena.Julia(-0.8,0.156);
+        Writer.writeToFile(Lena,"image2");
+/*
        try {
             Lena = Reader.readFromFile("lena.pgm");
         } catch (FileNotFoundException ex) {
@@ -35,12 +37,13 @@ public class ImageProcessing {
         }
     
       Writer.writeToFile(Lena.generateHistogram(),"lenahist");
-        
+*/        
+/*
       Lena.resize(200,200);
       Writer.writeToFile(Lena,"lenared");
       Lena.resize(1000,1000);
       Writer.writeToFile(Lena,"lenaagr");
-
+*/
       
 //Lena.seuil();
       //Writer.writeToFile(Lena,"seuild");
