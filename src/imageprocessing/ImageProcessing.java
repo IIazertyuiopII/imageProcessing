@@ -23,9 +23,9 @@ public class ImageProcessing {
         //Test des readers and writers
                 
         PGMImage Lena = new PGMImage(4000,4000);
-        Lena.Mandelbrot(-1,1,-1,1);
-        Writer.writeToFile(Lena,"image");
-        Lena.Julia(-0.8,0.156);
+        //Lena.Mandelbrot(-1,0,3,3);
+        //Writer.writeToFile(Lena,"image");
+        Lena.Julia(-0.8,0.156,0,0,3,3);
         Writer.writeToFile(Lena,"image2");
 /*
        try {

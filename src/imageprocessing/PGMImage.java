@@ -104,7 +104,7 @@ public class PGMImage {
         
     }
     
-    public void Julia(double Pr, double Pi) {
+    public void Julia(double Pr, double Pi,double x0, double y0, double frameL, double frameH) {
      
         double x;
         double y;
@@ -112,8 +112,8 @@ public class PGMImage {
         int couleur;
         
         for(int i=0; i<pixelArray.size(); i++){
-            x = -2+4*(double)(1+i%l)/l;
-            y = -2+4*(double)(1+(int)i/l)/h;
+            x = x0-frameL/2+((double)(1+i%l))/l*frameL;
+            y = y0-frameH/2+((double)(1+(int)i/l))/h*frameH;
             couleur=0;
             do{
                 tmp=Pr+x*x-y*y;
@@ -121,34 +121,39 @@ public class PGMImage {
                 x=tmp;
                 couleur++;
             }while(Math.sqrt(x*x+y*y)<=2 && couleur<greyScale);
-            pixelArray.set(i,couleur);
+            pixelArray.set(i,3*couleur%greyScale);
         }
         
     }
     
-    public void Mandelbrot(int x0, int x1, int y0, int y1) {
+    public void Mandelbrot(double x0, double y0, double frameL, double frameH) {
      
-        int x;
-        int y;
+        double Pr;
+        double Pi;
         int couleur;
-        double Zr;
-        double Zi;
+        double x;
+        double y;
         double tmp;
         
         for(int i=0; i<pixelArray.size(); i++){
-            x = -x0+2*x1*(1+i%l)/l;
-            y = -y0+2*y1*(1+(int)i/l)/h;
+            
+            Pr = x0-frameL/2+((double)(1+i%l))/l*(frameL);
+            Pi = y0-frameH/2+((double)(1+(int)i/l))/h*(frameH);
             couleur=0;
-            Zr = 0;
-            Zi = 0;
+            x = 0;
+            y = 0;
             do{
-                tmp=x+Zr*Zr-Zi*Zi;
-                Zi=y+2*Zr*Zi;
-                Zr=tmp;
+                tmp=Pr+x*x-y*y;
+                y=Pi+2*x*y;
+                x=tmp;
                 couleur++;
-            }while(Math.sqrt(x*x+y*y)<=2 && couleur<16);
-            if(couleur==16)pixelArray.set(i,greyScale);
-            else pixelArray.set(i,0);
+            }while(Math.sqrt(x*x+y*y)<=2 && couleur<greyScale);
+            if(couleur==greyScale){
+                pixelArray.set(i,greyScale);
+            }
+            else{
+                pixelArray.set(i,0);
+            }
         }
         
     }
